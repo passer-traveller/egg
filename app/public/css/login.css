@@ -16,11 +16,26 @@
     background-position: center 0;
 }
 .login {
-    width: 300px;
-    height: 400px;
+    width: 400px;
+    height: 300px;
     background: #fff;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -200px 0 0 -150px;
+    margin: -150px 0 0 -200px;
+    text-align: center;
+}
+.login_ul {
+    margin: 45px 0;
+}
+#registered {
+    background: #ccc;
+    /* margin-left: 10px; */
+}
+#registered:hover { /* 鼠标移入按钮范围时改变颜色 */
+	background: #5599FF;
+}
+.login_a {
+    margin-left: -75px;
+    margin-top: 20px;
 }

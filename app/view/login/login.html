@@ -7,6 +7,8 @@
     <!-- <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="/public/css/common.css">
     <link rel="stylesheet" href="/public/css/login.css">
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+
     <title>Document</title>
     <!-- <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -17,8 +19,82 @@
         <!-- <img src="/public/image/background.jpg" alt=""> -->
         <!-- <p>this is login!</p> -->
         <div class="login">
-            登陆
+            <ul class="login_ul">
+                <li>
+                    <label for="username">账号:</label>
+                    <input type="text" id="username"  value="admin">
+                </li>
+                <li>
+                    <label for="password">密码:</label>
+                    <input type="password" id="password"  value="admin">
+                </li>
+            </ul>
+            <div class="login_btn">
+                <!-- <a href="/loginAction"> -->
+                    <button class="login-button" id="login">登陆</button>
+                <!-- </a> -->
+                <button class="login-button" id="registered">注册</button>
+            </div>
+            <div class="login_a">
+                <a href="javascript:;">忘记密码/重置密码</a>
+            </div>
         </div>
     </div>
 </body>
 </html>
+<script>
+    
+    $('#login').on('click', function(){
+        var _data = {
+            username: $('#username').val(),
+            password: $('#password').val()
+        }
+
+        $.ajax({
+            type:'get',
+            url:'/loginAction?username='+ $('#username').val() + '&password=' + $('#password').val(),
+            cache:false,
+            dataType:'json',
+            success:function(data){
+                cosnole.log('ajax data --->> ', data)
+                // var item;
+                // item=data.list[0].item;
+                // $("#divp").html(item);
+            }
+        });
+
+        // action="/loginAction"
+        // if($('#username').val() && $('#password').val()){
+        //     $.get('/loginAction', {
+        //             username: $('#username').val(),
+        //             password: $('#password').val()
+        //         }, function(res) {
+        //             console.log('html res --->> ', res)
+        //         }
+        //     )
+        // }
+        // $.ajax({
+        //     url:"/loginAction",    //请求的url地址
+        //     dataType:"json",   //返回格式为json
+        //     async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+        //     data:_data,    //参数值
+        //     type:"POST",   //请求方式
+        //     beforeSend:function(){
+        //         //请求前的处理
+        //     },
+        //     success:function(req){
+        //         //请求成功时处理
+        //         console.log('req, ------->> ', req)
+        //     },
+        //     complete:function(){
+        //         //请求完成的处理
+        //     },
+        //     error:function(){
+        //         //请求出错处理
+        //     }
+        // })
+    })
+    // console.log('$ --->> ', $('#login'))
+
+
+</script>
