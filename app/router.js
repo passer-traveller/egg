@@ -13,4 +13,5 @@ module.exports = app => {
   require('./router/home')(app);
   require('./router/news')(app);
   require('./router/login')(app);
+  require('./router/blog')(app);
 };

@@ -8,24 +8,69 @@ class HomeController extends Controller {
     // ctx.body = 'hi, 11111111111111111111111111111111';
     await this.ctx.render('login/login.html');
   }
-  async success() {
-    const { ctx } = this;
-    // ctx.body = 'hi, 11111111111111111111111111111111';
-    const results = {results:[{    "pwd": "admin",
-    "id": 0,
-    "user": "admin"}]}
-    console.log('==================>> ', results);
-    await this.ctx.render('login/loginSuccess.html', results);
-  }
+  // async success() {
+  //   const { ctx } = this;
+  //   // ctx.body = 'hi, 11111111111111111111111111111111';
+  //   const results = {results:[{    "pwd": "admin",
+  //   "id": 0,
+  //   "user": "admin"}]}
+  //   console.log('==================>> ', results);
+  //   await this.ctx.render('login/loginSuccess.html', results);
+  // }
   async login() {
+    const { ctx } = this;
+    console.log('controller login this ----->>> ', this.ctx.query);
+    // let username = 'username';
+    // let password = 'password';
+    const { username, password } = this.ctx.query; // 获取用户入参
+    // 调用service方法
+    const userinfo = await ctx.service.login.login.loginAction(username, password);
+    console.log('userinfo ------------------->> ', userinfo);
+    // await this.ctx.render('/', userinfo);
+
+    if (userinfo) {
+      this.ctx.redirect('/');
+    } else {
+      return;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // let { id } = this.ctx.params; // 获取路由参数
     // console.log('--->>> ', this)
 
     // console.log('this.ctx ------------->>> ', this.ctx );
-    let { username, password } = this.ctx.query; // 获取用户入参
 
-    const results = await this.app.mysql.get('login', { user: username, pwd: password });
-    console.log('results --->> ', results );
+
+
+
+    // let { username, password } = this.ctx.query; // 获取用户入参
+    // console.log('--------->> ', username, password);
+
+    // const results = await this.app.mysql.get('login', { user: username, pwd: password });
+    // console.log('results --->> ', results );
+
+
+
+
     // const results = await this.app.mysql.select('login', { // 搜索 login 表
       // where: { user: username, pwd: password }, // WHERE 条件
       // columns: [ 'id' ], // 要查询的表字段
@@ -43,11 +88,11 @@ class HomeController extends Controller {
     // 调用service方法
     // let info = await this.ctx.service.main.getInfo(options);
     // 拼装响应体
-    this.ctx.body = {
-      code: 0,
-      data: results,
-    };
-    this.ctx.status = 200;
+    // this.ctx.body = {
+    //   code: 0,
+    //   data: userinfo,
+    // };
+    // this.ctx.status = 200;
     // await this.ctx.render('login/loginSuccess.html', results);
 
 
@@ -73,7 +118,6 @@ class HomeController extends Controller {
     //   // offset: 0, // 数据偏移量
     // });
     // console.log('results --->> ', results);
-    // this.ctx.redirect('/news', results);
   }
 }
 
